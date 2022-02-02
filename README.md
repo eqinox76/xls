@@ -1,15 +1,6 @@
-# xls
+Very minor fixes of the original library as the maintainer seems to no longer maintain it.
+Please prefer one of the other forks to use.
 
-[![GoDoc](https://godoc.org/github.com/extrame/xls?status.svg)](https://godoc.org/github.com/extrame/xls)
+[reading large numbers] (https://github.com/extrame/xls/issues/74)
 
-Pure Golang xls library writen by [Rongshu Tech (chinese)](http://www.rongshu.tech), based on libxls. 
 
-Thanks for contributions from Tamás Gulácsi @tgulacsi, @flyin9.
-
-# Basic Usage
-
-* Use **Open** function for open file
-* Use **OpenWithCloser** function for open file and use the return value closer for close file
-* Use **OpenReader** function for open xls from a reader, you should close related file in your own code
-
-* Follow the example in GoDoc

@@ -168,7 +168,18 @@ type NumberCol struct {
 }
 
 func (c *NumberCol) String(wb *WorkBook) []string {
-	if fNo := wb.Xfs[c.Index].formatNo(); fNo != 0 {
+	fNo := wb.Xfs[c.Index].formatNo()
+
+	// https://github.com/extrame/xls/issues/74
+	if fNo >= 164 {
+		format := wb.Formats[fNo]
+		if strings.Contains(format.str, "yy") || strings.Contains(format.str, "hh") {
+			// seems to be a datetime
+			t := timeFromExcelTime(c.Float, wb.dateMode == 1)
+			return []string{yymmdd.Format(t, wb.Formats[fNo].str)}
+		}
+	}
+	if 14 <= fNo && fNo <= 17 || fNo == 22 || 27 <= fNo && fNo <= 36 || 50 <= fNo && fNo <= 58 {
 		t := timeFromExcelTime(c.Float, wb.dateMode == 1)
 		return []string{yymmdd.Format(t, wb.Formats[fNo].str)}
 	}
